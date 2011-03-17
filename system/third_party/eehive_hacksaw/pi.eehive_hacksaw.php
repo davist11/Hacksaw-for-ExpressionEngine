@@ -60,7 +60,9 @@ var $return_data = "";
 		// Strip the HTML
 		$stripped_content = strip_tags($tag_content, $allow);
 		$new_content = $this->_truncate_words($stripped_content, $words, $append);
-	} 
+	} else {
+    $new_content = strip_tags($tag_content, $allow);
+  }
 	
 	// Return the new content
     $this->return_data = $new_content;
@@ -80,7 +82,7 @@ var $return_data = "";
 	
   // Helper Function - Truncate by Character Limit
   function _truncate_chars($content, $limit, $append) {
-    $content = substr($content,0,$limit) . $append;  
+    $content = $this->EE->functions->char_limiter($content, $limit) . $append;  
     return $content;
   }
   
